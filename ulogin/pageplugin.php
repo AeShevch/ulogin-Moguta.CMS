@@ -13,22 +13,41 @@
 ?>
 <div class="widget-table-body">
 	<div class="wrapper-ulogin-setting">
-		<ul>
-			<li>
-				<p class="label-text"><?php echo $lang['ULOGINID1'] ?></p>
-				<input type="text" name="uloginid1" value="<?php echo $options['uloginid1'] ?>">
-				<span class="help-text"><?php echo $lang['ULOGINID1_TEXT']; ?></span>
-			</li>
-			<li>
-				<p class="label-text"><?php echo $lang['ULOGINID2'] ?></p><br/>
-				<input type="text" name="uloginid2" value="<?php echo $options['uloginid2'] ?>">
-				<span class="help-text"><?php echo $lang['ULOGINID2_TEXT']; ?></span>
-			</li>
-			<li>
-				<button id="ulogin-save" class="base-setting-save button" title="<?php echo $lang['SAVE_MODAL']; ?>">
-					<span><?php echo $lang['SAVE']; ?></span>
-				</button>
-			</li>
-		</ul>
+		<div class="row">
+			<div class="large-5 columns">
+				<div class="row sett-line">
+					<div class="small-12 medium-5 columns">
+						<label class="middle with-help"><?php echo $lang['ULOGINID1'] ?><span class="question__wrap" tooltip="<?php echo $lang['ULOGINID1_TEXT']; ?>" flow="leftUp"><i class="fa fa-question-circle" aria-hidden="true" from="uloginid1"></i></span></label>
+					</div>
+					<div class="small-12 medium-7 columns">
+						<input type="text" class="settings-input large" name="uloginid1" id="uloginid1" value="<?php echo $options['uloginid1'] ?>">
+					</div>
+				</div>
+				<div class="row sett-line">
+					<div class="small-12 medium-5 columns">
+						<label class="middle with-help"><?php echo $lang['ULOGINID2'] ?><span class="question__wrap" tooltip="<?php echo $lang['ULOGINID2_TEXT']; ?>" flow="leftUp"><i class="fa fa-question-circle" aria-hidden="true" from="uloginid2"></i></span></label>
+					</div>
+					<div class="small-12 medium-7 columns">
+						<input type="text" class="settings-input large" name="uloginid2" id="uloginid2" value="<?php echo $options['uloginid2'] ?>">
+					</div>
+				</div>
+				<div class="row">
+					<div class="text-left">
+						<button id="ulogin-save" class="base-setting-save save-button save-settings button success" title="<?php echo $lang['SAVE_MODAL']; ?>">
+							<span><?php echo $lang['SAVE']; ?></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
 </div>
+
+<style>
+
+.widget-table-body label {
+	border-bottom: 1px dashed #ccc;
+}
+
+</style>

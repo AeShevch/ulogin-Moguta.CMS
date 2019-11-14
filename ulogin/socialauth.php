@@ -139,7 +139,7 @@ function ulogin_registration_user($u_user, $in_db = 0) {
 	$isLoggedIn = (isset($current_user->id) && $current_user->id > 0) ? true : false;
 	if(!$check_m_user && !$isLoggedIn) { // отсутствует пользователь с таким email в базе -> регистрация
 		$date = explode('.', $u_user['bdate']);
-		$insert_user = array('pass' => md5(microtime(true)), 'email' => $u_user['email'], 'role' => 2, 'name' => $u_user['first_name'], 'sname' => $u_user['last_name'], 'address' => '', 'phone' => $u_user['phone'], 'birthday' => $date['2'] . '-' . $date['1'] . '-' . $date['0'], 'activity' => 1);
+        $insert_user = array('pass' => md5(microtime(true)), 'email' => $u_user['email'], 'role' => 2, 'name' => $u_user['first_name'], 'sname' => $u_user['last_name'], 'address' => '', 'phone' => $u_user['phone'], 'birthday' => $date['2'] . '-' . $date['1'] . '-' . $date['0'], 'activity' => 1);
 		$user_id = USER::add($insert_user);
 		$user_id = DB::insertId();
 		$userData = USER::getUserById($user_id);
@@ -149,7 +149,7 @@ function ulogin_registration_user($u_user, $in_db = 0) {
 		return $userData->id;
 	} else { // существует пользователь с таким email или это текущий пользователь
 		if(!isset($u_user["verified_email"]) || intval($u_user["verified_email"]) != 1) {
-			die('<head></head><body><script src="//ulogin.ru/js/ulogin.js"  type="text/javascript"></script><script type="text/javascript">uLogin.mergeAccounts("' . $_POST['token'] . '")</script>' . ("Электронный адрес данного аккаунта совпадает с электронным адресом существующего пользователя. <br>Требуется подтверждение на владение указанным email.</br></br>") . ("Подтверждение аккаунта") . "</body>");
+			die('<head></head><body><script src="//ulogin.ru/js/ulogin.js"></script><script>uLogin.mergeAccounts("' . $_POST['token'] . '")</script>' . ("Электронный адрес данного аккаунта совпадает с электронным адресом существующего пользователя. <br>Требуется подтверждение на владение указанным email.</br></br>") . ("Подтверждение аккаунта") . "</body>");
 		}
 		if(intval($u_user["verified_email"]) == 1) {
 			$user_id = $isLoggedIn ? $current_user->id : $user_id;
@@ -157,7 +157,7 @@ function ulogin_registration_user($u_user, $in_db = 0) {
 			$other_u = DB::fetchAssoc($other_u);
 			if($other_u) {
 				if(!$isLoggedIn && !isset($u_user['merge_account'])) {
-					die('<head></head><body><script src="//ulogin.ru/js/ulogin.js"  type="text/javascript"></script><script type="text/javascript">uLogin.mergeAccounts("' . $_POST['token'] . '","' . $other_u['identity'] . '")</script>' . ("С данным аккаунтом уже связаны данные из другой социальной сети. <br>Требуется привязка новой учётной записи социальной сети к этому аккаунту.<br/>") . ("Синхронизация аккаунтов") . "</body>");
+					die('<head></head><body><script src="//ulogin.ru/js/ulogin.js"></script><script>uLogin.mergeAccounts("' . $_POST['token'] . '","' . $other_u['identity'] . '")</script>' . ("С данным аккаунтом уже связаны данные из другой социальной сети. <br>Требуется привязка новой учётной записи социальной сети к этому аккаунту.<br/>") . ("Синхронизация аккаунтов") . "</body>");
 				}
 			}
 			DB::query("INSERT INTO " . PREFIX . "ulogin (user_id, identity, network)

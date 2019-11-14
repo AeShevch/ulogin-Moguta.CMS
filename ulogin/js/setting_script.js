@@ -26,15 +26,9 @@ var uloginAuthModule = (function () {
 
             // Сохраняет базовые настроки
             $('.admin-center').on('click', '#ulogin-save', function () {
-                //преобразуем полученные данные в JS объект для передачи на сервер
-                var obj = '{';
-                $('.widget-table-action input').each(function () {
-                    obj += '"' + $(this).attr('name') + '":"' + $(this).val() + '",';
-                });
-                obj += '}';
-                var data = eval("(" + obj + ")");
-                data.uloginid1 = $(".widget-table-action input[name=uloginid1]").val();
-                data.uloginid2 = $(".widget-table-action input[name=uloginid2]").val();
+                var data = {};
+                data.uloginid1 = $("input[name=uloginid1]").val();
+                data.uloginid2 = $("input[name=uloginid2]").val();
 
                 $.ajax({
                     type: "POST",
